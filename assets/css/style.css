@@ -159,3 +159,12 @@ table tbody tr:nth-child(even) {
   margin-bottom: 12px;
   color: #475569;
 }
+
+.badge-disabled {
+  display: inline-block;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #e5e7eb;
+  color: #6b7280;
+  font-size: 13px;
+}

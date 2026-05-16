@@ -46,6 +46,7 @@ $barang = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="top-bar">
             <a href="../pages/barang/tambah.php" class="btn btn-primary">+ Tambah Barang</a>
+            <a href="../pages/kategori/index.php" class="btn btn-secondary">Kelola Kategori</a>
             <form action="" method="GET" class="search-form">
                 <input 
                     type="text" 
