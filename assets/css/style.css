@@ -94,3 +94,36 @@ table tbody tr:nth-child(even) {
 .btn:hover {
   opacity: 0.9;
 }
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.form-action {
+  margin-top: 20px;
+}
+
+.btn-secondary {
+  background: #64748b;
+}

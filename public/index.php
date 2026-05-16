@@ -1,5 +1,5 @@
 <?php
-require_once "../config/database.php";
+require_once __DIR__ . "/../config/database.php";
 
 $query = "
     SELECT
@@ -83,3 +83,4 @@ $barang = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     </div>
 </body>
+</html>
