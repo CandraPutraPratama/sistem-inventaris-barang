@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . "/../config/database.php";
 
+$keyword = $_GET["keyword"] ?? "";
+
 $query = "
     SELECT
         barang.id,
@@ -12,10 +14,17 @@ $query = "
         kategori.nama_kategori
     FROM barang
     LEFT JOIN kategori ON barang.kategori_id = kategori.id
+    WHERE 
+        barang.nama_barang ILIKE :keyword OR 
+        barang.kode_barang ILIKE :keyword OR
+        kategori.nama_kategori ILIKE :keyword OR
+        barang.lokasi ILIKE :keyword
     ORDER BY barang.id DESC
 ";
 
 $stmt = $conn->prepare($query);
+$searchKeyword = '%' . $keyword . '%';
+$stmt->bindParam(":keyword", $searchKeyword);
 $stmt->execute();
 $barang = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -37,10 +46,29 @@ $barang = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="top-bar">
             <a href="../pages/barang/tambah.php" class="btn btn-primary">+ Tambah Barang</a>
+            <form action="" method="GET" class="search-form">
+                <input 
+                    type="text" 
+                    name="keyword" 
+                    placeholder="Cari barang..." 
+                    value="<?= htmlspecialchars($keyword); ?>"
+                >
+                <button type="submit" class="btn btn-primary">Cari</button>
+
+                <?php if (!empty($keyword)): ?>
+                    <a href="index.php" class="btn btn-secondary">Reset</a>
+                <?php endif; ?>
+            </form>
         </div>
 
         <div class="card">
             <h2>Data Barang</h2>
+
+            <?php if (!empty($keyword)): ?>
+                <p class="search-info">
+                    Hasil pencarian untuk: <strong><?= htmlspecialchars($keyword); ?></strong>
+                </p>
+            <?php endif; ?>
             <table>
                 <thead>
                     <tr>
@@ -74,7 +102,9 @@ $barang = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="8" class="text-center">Belum ada data barang.</td>
+                            <td colspan="8" class="text-center">
+                                <?= !empty($keyword) ? 'Data barang tidak ditemukan' : 'Belum ada data barang'; ?>
+                            </td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
