@@ -168,3 +168,51 @@ table tbody tr:nth-child(even) {
   color: #6b7280;
   font-size: 13px;
 }
+
+.btn-success {
+  background: #16a34a;
+}
+
+.btn-dark {
+  background: #334155;
+}
+
+.detail-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.detail-box p {
+  margin-bottom: 8px;
+}
+
+.alert {
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.alert-danger {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: white;
+}
+
+.badge-success {
+  background: #16a34a;
+}
+
+.badge-danger {
+  background: #dc2626;
+}

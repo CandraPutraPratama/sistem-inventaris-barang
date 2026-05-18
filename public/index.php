@@ -47,6 +47,7 @@ $barang = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="top-bar">
             <a href="../pages/barang/tambah.php" class="btn btn-primary">+ Tambah Barang</a>
             <a href="../pages/kategori/index.php" class="btn btn-secondary">Kelola Kategori</a>
+            <a href="../pages/stok/index.php" class="btn btn-secondary">Riwayat Stok</a>
             <form action="" method="GET" class="search-form">
                 <input 
                     type="text" 
@@ -96,6 +97,8 @@ $barang = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <td><?= htmlspecialchars($item['satuan']) ?></td>
                                 <td><?= htmlspecialchars($item['lokasi']) ?></td>
                                 <td>
+                                    <a href="../pages/stok/masuk.php?id=<?= $item['id']; ?>" class="btn btn-success">Stok Masuk</a>
+                                    <a href="../pages/stok/keluar.php?id=<?= $item['id']; ?>" class="btn btn-dark">Stok Keluar</a>
                                     <a href="../pages/barang/edit.php?id=<?= $item['id'] ?>" class="btn btn-warning">Edit</a>
                                     <a href="../pages/barang/hapus.php?id=<?= $item['id'] ?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">Hapus</a>
                                 </td>
