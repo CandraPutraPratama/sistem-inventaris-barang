@@ -1,6 +1,43 @@
 <?php
 require_once __DIR__ . "/../config/database.php";
 
+$queryTotalBarang = "SELECT COUNT(*) AS total FROM barang";
+$stmtTotalBarang = $conn->prepare($queryTotalBarang);
+$stmtTotalBarang->execute();
+$totalBarang = $stmtTotalBarang->fetch(PDO::FETCH_ASSOC)['total'];
+
+$queryTotalKategori = "SELECT COUNT(*) AS total FROM kategori";
+$stmtTotalKategori = $conn->prepare($queryTotalKategori);
+$stmtTotalKategori->execute();
+$totalKategori = $stmtTotalKategori->fetch(PDO::FETCH_ASSOC)['total'];
+
+$queryTotalStok = "SELECT COALESCE(SUM(stok), 0) AS total FROM barang";
+$stmtTotalStok = $conn->prepare($queryTotalStok);
+$stmtTotalStok->execute();
+$totalStok = $stmtTotalStok->fetch(PDO::FETCH_ASSOC)['total'];
+
+$queryStokMenipis = "SELECT COUNT(*) AS total FROM barang WHERE stok <= 5";
+$stmtStokMenipis = $conn->prepare($queryStokMenipis);
+$stmtStokMenipis->execute();
+$stokMenipis = $stmtStokMenipis->fetch(PDO::FETCH_ASSOC)['total'];
+
+$queryRiwayatTerbaru = "
+    SELECT 
+        stok_transaksi.jenis_transaksi,
+        stok_transaksi.jumlah,
+        stok_transaksi.tanggal,
+        barang.nama_barang,
+        barang.satuan
+    FROM stok_transaksi
+    INNER JOIN barang ON stok_transaksi.barang_id = barang.id
+    ORDER BY stok_transaksi.tanggal DESC
+    LIMIT 5
+";
+
+$stmtRiwayatTerbaru = $conn->prepare($queryRiwayatTerbaru);
+$stmtRiwayatTerbaru->execute();
+$riwayatTerbaru = $stmtRiwayatTerbaru->fetchAll(PDO::FETCH_ASSOC);
+
 $keyword = $_GET["keyword"] ?? "";
 
 $query = "
@@ -44,6 +81,66 @@ $barang = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <p>Data inventaris barang kantor/organisasi</p>
         </div>
 
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Total Barang</h3>
+                <p><?= htmlspecialchars($totalBarang); ?></p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Total Kategori</h3>
+                <p><?= htmlspecialchars($totalKategori); ?></p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Total Stok</h3>
+                <p><?= htmlspecialchars($totalStok); ?></p>
+            </div>
+
+            <div class="dashboard-card warning-card">
+                <h3>Stok Menipis</h3>
+                <p><?= htmlspecialchars($stokMenipis); ?></p>
+            </div>
+        </div>
+
+        <div class="card latest-card">
+            <h2>Riwayat Stok Terbaru</h2>
+
+            <?php if (count($riwayatTerbaru) > 0): ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Nama Barang</th>
+                            <th>Jenis</th>
+                            <th>Jumlah</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($riwayatTerbaru as $item): ?>
+                            <tr>
+                                <td><?= date('d-m-Y H:i', strtotime($item['tanggal'])); ?></td>
+                                <td><?= htmlspecialchars($item['nama_barang']); ?></td>
+                                <td>
+                                    <?php if ($item['jenis_transaksi'] == 'masuk'): ?>
+                                        <span class="badge badge-success">Masuk</span>
+                                    <?php else: ?>
+                                        <span class="badge badge-danger">Keluar</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?= htmlspecialchars($item['jumlah']); ?>
+                                    <?= htmlspecialchars($item['satuan']); ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>Belum ada riwayat stok terbaru</p>
+            <?php endif; ?>
+        </div>
+        
         <div class="top-bar">
             <a href="../pages/barang/tambah.php" class="btn btn-primary">+ Tambah Barang</a>
             <a href="../pages/kategori/index.php" class="btn btn-secondary">Kelola Kategori</a>
