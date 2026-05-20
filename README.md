@@ -58,39 +58,45 @@ sistem-inventaris-barang/
 │
 ├── .gitignore
 └── README.md
+```
 
 ## Database
+
 inventaris_barang
 
 ## Tabel Kategori
+
 CREATE TABLE kategori (
-    id SERIAL PRIMARY KEY,
-    nama_kategori VARCHAR(100) NOT NULL
+id SERIAL PRIMARY KEY,
+nama_kategori VARCHAR(100) NOT NULL
 );
 
 ## Tabel Barang
+
 CREATE TABLE barang (
-    id SERIAL PRIMARY KEY,
-    nama_barang VARCHAR(150) NOT NULL,
-    kode_barang VARCHAR(50) UNIQUE NOT NULL,
-    kategori_id INT REFERENCES kategori(id) ON DELETE SET NULL,
-    stok INT NOT NULL DEFAULT 0,
-    satuan VARCHAR(50) NOT NULL,
-    lokasi VARCHAR(100),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+id SERIAL PRIMARY KEY,
+nama_barang VARCHAR(150) NOT NULL,
+kode_barang VARCHAR(50) UNIQUE NOT NULL,
+kategori_id INT REFERENCES kategori(id) ON DELETE SET NULL,
+stok INT NOT NULL DEFAULT 0,
+satuan VARCHAR(50) NOT NULL,
+lokasi VARCHAR(100),
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 ## Tabel Stok Transaksi
+
 CREATE TABLE stok_transaksi (
-    id SERIAL PRIMARY KEY,
-    barang_id INT REFERENCES barang(id) ON DELETE CASCADE,
-    jenis_transaksi VARCHAR(20) NOT NULL,
-    jumlah INT NOT NULL,
-    keterangan TEXT,
-    tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+id SERIAL PRIMARY KEY,
+barang_id INT REFERENCES barang(id) ON DELETE CASCADE,
+jenis_transaksi VARCHAR(20) NOT NULL,
+jumlah INT NOT NULL,
+keterangan TEXT,
+tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 ## Data Awal
+
 INSERT INTO kategori (nama_kategori) VALUES
 ('Elektronik'),
 ('Alat Tulis'),
@@ -99,6 +105,7 @@ INSERT INTO kategori (nama_kategori) VALUES
 ('Lainnya');
 
 ## Contoh data barang:
+
 INSERT INTO barang (nama_barang, kode_barang, kategori_id, stok, satuan, lokasi)
 VALUES
 ('Laptop Lenovo ThinkPad', 'BRG001', 1, 5, 'unit', 'Ruang IT'),
@@ -106,24 +113,28 @@ VALUES
 ('Meja Kantor', 'BRG003', 4, 10, 'unit', 'Ruang Administrasi');
 
 ## Cara Menjalankan Project
+
 1. Clone repository ini:
-git clone https://github.com/username/sistem-inventaris-barang.git
+   git clone https://github.com/username/sistem-inventaris-barang.git
 2. Masuk ke folder project:
-cd sistem-inventaris-barang
+   cd sistem-inventaris-barang
 3. Pindahkan folder project ke direktori Laragon:
-C:\laragon\www\
+   C:\laragon\www\
 4. Buat database PostgreSQL dengan nama:
-inventaris_barang
+   inventaris_barang
 5. Jalankan query pembuatan tabel yang ada dibagian Database.
 6. Atur koneksi database di file:
-config/database.php
-Sesuaikan bagian berikut:
-$host = "localhost";
+   config/database.php
+   Sesuaikan bagian berikut:
+   $host = "localhost";
 $port = "5432";
-$dbname = "inventaris_barang";
+   $dbname = "inventaris_barang";
 $user = "postgres";
-$password = "password_postgres_kamu";
+   $password = "password_postgres_kamu";
 7. Jalankan Laragon
 8. Buka aplikasi di browser:
-http://localhost/sistem-inventaris-barang/public/
+   http://localhost/sistem-inventaris-barang/public/
+
+```
+
 ```
