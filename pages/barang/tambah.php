@@ -46,14 +46,17 @@ if (($_SERVER["REQUEST_METHOD"] ?? "GET") == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Barang</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css?v=20260529">
 </head>
 <body>
 
     <div class="container">
         <div class="header">
-            <h1>Tambah Barang</h1>
-            <p>Masukkan data barang baru ke sistem inventaris</p>
+            <img src="../../assets/img/creativity-infinity-logo.png" alt="Creativity Infinity Logo" class="app-logo" width="56" height="56">
+            <div class="header-text">
+                <h1>Tambah Barang</h1>
+                <p>Masukkan data barang baru ke sistem inventaris</p>
+            </div>
         </div>
 
         <div class="card">

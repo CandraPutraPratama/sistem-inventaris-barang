@@ -72,13 +72,16 @@ $barang = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Inventaris Barang</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=20260529">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Sistem Inventaris Barang</h1>
-            <p>Data inventaris barang kantor/organisasi</p>
+            <img src="../assets/img/creativity-infinity-logo.png" alt="Creativity Infinity Logo" class="app-logo" width="56" height="56">
+            <div class="header-text">
+                <h1>Sistem Inventaris Barang</h1>
+                <p>Data inventaris barang kantor/organisasi</p>
+            </div>
         </div>
 
         <div class="dashboard-grid">
@@ -142,9 +145,11 @@ $barang = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         
         <div class="top-bar">
-            <a href="../pages/barang/tambah.php" class="btn btn-primary">+ Tambah Barang</a>
-            <a href="../pages/kategori/index.php" class="btn btn-secondary">Kelola Kategori</a>
-            <a href="../pages/stok/index.php" class="btn btn-secondary">Riwayat Stok</a>
+            <div>
+                <a href="../pages/barang/tambah.php" class="btn btn-primary">+ Tambah Barang</a>
+                <a href="../pages/kategori/index.php" class="btn btn-secondary">Kelola Kategori</a>
+                <a href="../pages/stok/index.php" class="btn btn-secondary">Riwayat Stok</a>
+            </div>
             <form action="" method="GET" class="search-form">
                 <input 
                     type="text" 

@@ -23,14 +23,17 @@ $kategori = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kelola Kategori</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css?v=20260529">
 </head>
 <body>
 
     <div class="container">
         <div class="header">
-            <h1>Kelola Kategori</h1>
-            <p>Manajemen data kategori barang inventaris</p>
+            <img src="../../assets/img/creativity-infinity-logo.png" alt="Creativity Infinity Logo" class="app-logo" width="56" height="56">
+            <div class="header-text">
+                <h1>Kelola Kategori</h1>
+                <p>Manajemen data kategori barang inventaris</p>
+            </div>
         </div>
 
         <div class="top-bar">

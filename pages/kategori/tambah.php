@@ -25,14 +25,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Kategori</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css?v=20260529">
 </head>
 <body>
 
     <div class="container">
         <div class="header">
-            <h1>Tambah Kategori</h1>
-            <p>Tambahkan kategori baru untuk data barang</p>
+            <img src="../../assets/img/creativity-infinity-logo.png" alt="Creativity Infinity Logo" class="app-logo" width="56" height="56">
+            <div class="header-text">
+                <h1>Tambah Kategori</h1>
+                <p>Tambahkan kategori baru untuk data barang</p>
+            </div>
         </div>
 
         <div class="card">
